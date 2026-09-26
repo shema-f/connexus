@@ -33,6 +33,16 @@
   }
 }
 
+/* Always-emitted keyframes (Tailwind only emits config keyframes for used animate-* utilities) */
+@keyframes flow-x {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
 @layer components {
   /* ---- Containers ---- */
   .container-page {
@@ -86,7 +96,7 @@
     @apply mb-1.5 block text-sm font-medium text-white/85;
   }
   .field-input {
-    @apply w-full rounded-lg border border-white/12 bg-ink-800/80 px-4 py-3 text-sm text-white placeholder:text-graphite/60 transition-colors focus:border-signal-400 focus:outline-none focus:ring-1 focus:ring-signal-400;
+    @apply w-full rounded-lg border border-white/10 bg-ink-800/80 px-4 py-3 text-sm text-white placeholder:text-graphite/60 transition-colors focus:border-signal-400 focus:outline-none focus:ring-1 focus:ring-signal-400;
   }
   textarea.field-input {
     @apply min-h-[120px] resize-y;
