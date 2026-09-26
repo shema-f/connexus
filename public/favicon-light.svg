@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Connexus">
+  <defs>
+    <linearGradient id="cxrl" x1="16" y1="9" x2="49" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#38d4f5"/>
+      <stop offset="0.5" stop-color="#1c7ff2"/>
+      <stop offset="1" stop-color="#0b4b99"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#ffffff"/>
+  <path d="M32 5.8A26.2 26.2 0 1 0 32 58.2 26.2 26.2 0 0 0 32 5.8Zm0 9.6a16.6 16.6 0 1 1 0 33.2 16.6 16.6 0 0 1 0-33.2Z" fill="url(#cxrl)" fill-rule="evenodd" transform="rotate(28 32 32)"/>
+  <circle cx="21.5" cy="32" r="5.5" fill="#1c7ff2"/>
+  <circle cx="42.5" cy="32" r="4" fill="#1c7ff2"/>
+  <rect x="24" y="30" width="16" height="4" rx="2" fill="#1c7ff2"/>
+</svg>

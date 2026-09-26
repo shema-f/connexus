@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" role="img" aria-label="Connexus logo mark">
+  <defs>
+    <linearGradient id="cx-ring" x1="26" y1="14" x2="76" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5bdaf8"/>
+      <stop offset="0.45" stop-color="#1c7ff2"/>
+      <stop offset="1" stop-color="#0b4b99"/>
+    </linearGradient>
+    <linearGradient id="cx-link" x1="30" y1="38" x2="72" y2="62" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#38d4f5"/>
+      <stop offset="1" stop-color="#1c7ff2"/>
+    </linearGradient>
+  </defs>
+  <!-- C ring -->
+  <path d="M50 6a44 44 0 1 0 0 88 44 44 0 0 0 0-88Zm0 15a29 29 0 1 1 0 58 29 29 0 0 1 0-58Z"
+    fill="url(#cx-ring)" fill-rule="evenodd"
+    transform="rotate(28 50 50)" style="transform-origin:50px 50px"/>
+  <!-- Right opening of the C -->
+  <rect x="62" y="8" width="30" height="30" rx="14" fill="#05070b"/>
+  <rect x="62" y="62" width="30" height="30" rx="14" fill="#05070b"/>
+  <!-- Link nodes + bar -->
+  <circle cx="32" cy="50" r="9.5" fill="url(#cx-link)"/>
+  <circle cx="68" cy="50" r="7" fill="url(#cx-link)"/>
+  <rect x="36" y="46.5" width="28" height="7" rx="3.5" fill="url(#cx-link)"/>
+</svg>

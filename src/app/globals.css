@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: rgba(28, 127, 242, 0.35);
+    color: #fff;
+  }
+  :focus-visible {
+    outline: 2px solid #38d4f5;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* ---- Containers ---- */
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
+  }
+  .section-pad {
+    @apply py-20 sm:py-24 lg:py-32;
+  }
+
+  /* ---- Glass panel ---- */
+  .glass {
+    @apply border border-white/10 bg-white/[0.03] backdrop-blur-md;
+  }
+  .glass-strong {
+    @apply border border-white/10 bg-ink-900/70 backdrop-blur-xl;
+  }
+
+  /* ---- Technical label (monospaced eyebrow) ---- */
+  .tech-label {
+    @apply font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-graphite;
+  }
+  .tech-label-cyan {
+    @apply font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-cyanx;
+  }
+
+  /* ---- Status dot ---- */
+  .status-dot {
+    @apply relative inline-flex h-2 w-2 rounded-full;
+  }
+  .status-dot::after {
+    content: "";
+    @apply absolute inset-0 rounded-full animate-pulse-dot;
+  }
+
+  /* ---- Buttons ---- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-primary {
+    @apply btn bg-signal-500 text-white shadow-glow-sm hover:bg-signal-400 hover:shadow-glow active:bg-signal-600;
+  }
+  .btn-secondary {
+    @apply btn border border-white/15 bg-white/[0.04] text-white hover:border-white/30 hover:bg-white/[0.08];
+  }
+  .btn-ghost {
+    @apply btn text-graphite hover:text-white;
+  }
+
+  /* ---- Forms ---- */
+  .field-label {
+    @apply mb-1.5 block text-sm font-medium text-white/85;
+  }
+  .field-input {
+    @apply w-full rounded-lg border border-white/12 bg-ink-800/80 px-4 py-3 text-sm text-white placeholder:text-graphite/60 transition-colors focus:border-signal-400 focus:outline-none focus:ring-1 focus:ring-signal-400;
+  }
+  textarea.field-input {
+    @apply min-h-[120px] resize-y;
+  }
+  select.field-input {
+    @apply appearance-none bg-ink-800;
+  }
+
+  /* ---- Cards ---- */
+  .feature-card {
+    @apply glass rounded-2xl p-6 transition-all duration-300 hover:border-signal-400/40 hover:bg-signal-500/[0.06] hover:shadow-glow-sm;
+  }
+
+  /* ---- Flow line (animated connection) ---- */
+  .flow-line {
+    @apply h-px w-full;
+    background: linear-gradient(90deg, rgba(56, 212, 245, 0) 0%, rgba(56, 212, 245, 0.9) 30%, rgba(28, 127, 242, 0.9) 50%, rgba(56, 212, 245, 0) 100%);
+    background-size: 200% 100%;
+    animation: flow-x 3.2s linear infinite;
+  }
+
+  /* ---- Gradient text ---- */
+  .text-gradient {
+    @apply bg-gradient-to-r from-signal-300 via-cyanx to-signal-400 bg-clip-text text-transparent;
+  }
+
+  /* ---- Divider ---- */
+  .hairline {
+    @apply border-t border-white/[0.07];
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  }
+}
