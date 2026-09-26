@@ -48,6 +48,12 @@ npm run build && npm start
 | `/partners` `/investors` `/contact` | Business pages |
 | `/privacy` `/terms` `/cookies` `/developer-terms` | Legal |
 
+### Social links
+
+Official accounts are managed in `src/lib/site-config.ts` (`siteConfig.socials`). Only
+configured links render — footer icons and the contact page stay honest until real accounts
+go live. GitHub, LinkedIn, YouTube and X have brand icons; anything else gets a globe.
+
 ### Admin
 - `/admin` — dashboard (redirects to `/admin/login` without a session)
 - Moderation queues: reviews, developer profiles, developer projects
@@ -57,8 +63,22 @@ npm run build && npm start
 ## API
 
 `POST /api/early-access`, `/api/pilot`, `/api/demo`, `/api/contact`, `/api/reviews`,
-`/api/developers`, `/api/developers/projects`, `/api/newsletter` — all Zod-validated,
-rate-limited per IP.
+`/api/developers`, `/api/developers/projects`, `/api/newsletter`, `/api/assistant` — all
+Zod-validated, rate-limited per IP.
+
+### Connexus Bot (AI assistant)
+
+Every public page carries a floating **Connexus Bot** chat widget. It answers questions about
+the platform from a curated knowledge base (`src/lib/assistant-kb.ts`) in two modes:
+
+- **Local (default)** — keyword-scored retrieval over pre-approved copy. No internet, no data
+  leaves the server. On-brand: the bot itself works offline.
+- **Grounded LLM (optional)** — set `CONNEXUS_AI_API_URL` + `CONNEXUS_AI_API_KEY` to route
+  through any OpenAI-compatible chat API. The knowledge base is injected as grounding context
+  and the system prompt forbids inventing customers, dates or deployments; any LLM failure
+  falls back to local mode automatically.
+
+The bot is hidden on `/admin` routes and rate-limited (20 req/min/IP).
 
 `POST /api/admin/login`, `POST /api/admin/logout`,
 `GET|PATCH|DELETE /api/admin/[collection]` — session-cookie authenticated, audited.

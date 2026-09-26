@@ -3,6 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { PageHero } from "@/components/PageHero";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { SocialLinks } from "@/components/SocialLinks";
 import { siteConfig } from "@/lib/site-config";
 import { breadcrumbJsonLd } from "@/lib/seo";
 
@@ -36,6 +37,13 @@ export default function ContactPage() {
                 </a>
                 <p className="mt-4 font-mono text-[10px] tracking-[0.14em] text-graphite">
                   &ldquo;{siteConfig.company.slogan}&rdquo;
+                </p>
+              </div>
+              <div className="glass rounded-2xl p-6">
+                <span className="tech-label-cyan">FOLLOW</span>
+                <SocialLinks className="mt-4" />
+                <p className="mt-3 text-xs leading-relaxed text-graphite">
+                  Only official Ferrivox accounts are listed. We&apos;ll add channels as they go live.
                 </p>
               </div>
               <div className="glass rounded-2xl p-6">

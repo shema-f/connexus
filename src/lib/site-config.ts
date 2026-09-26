@@ -53,7 +53,31 @@ export const siteConfig = {
     { name: "AP IKIBINA", kind: "R&D project", flagship: false, href: null },
     { name: "FIESTA STUDIO", kind: "Creative studio", flagship: false, href: null },
   ],
-  socials: [] as { label: string; href: string }[], // Only populated when official URLs are provided.
+  /**
+   * Official social profiles. Leave empty until real URLs exist — the footer
+   * renders icons only for populated entries. Fill these in as accounts go live.
+   */
+  socials: [
+    // { label: "GitHub", href: "https://github.com/ferrivox" },
+    // { label: "LinkedIn", href: "https://www.linkedin.com/company/ferrivox" },
+    // { label: "YouTube", href: "https://www.youtube.com/@ferrivox" },
+    // { label: "X", href: "https://x.com/ferrivox" },
+  ] as { label: string; href: string }[],
+  assistant: {
+    name: "Connexus Bot",
+    tagline: "Ask me about Connexus — I run locally, no internet required.",
+    /** When CONNEXUS_AI_API_KEY + CONNEXUS_AI_API_URL are set, replies come from the LLM;
+     *  otherwise the bot answers entirely from the local knowledge base below. */
+    model: "connexus-local-v1",
+    suggestions: [
+      "What is Connexus?",
+      "Does it work without internet?",
+      "What is the Connexus Box?",
+      "How can developers build on it?",
+      "How do I request a pilot?",
+      "Is Connexus available now?",
+    ],
+  },
 } as const;
 
 export type SiteConfig = typeof siteConfig;

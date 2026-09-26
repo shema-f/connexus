@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LogoLockup } from "./brand/LogoMark";
+import { SocialLinks } from "./SocialLinks";
 import { siteConfig } from "@/lib/site-config";
 
 const productLinks = [
@@ -59,11 +60,22 @@ export function Footer() {
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-graphite">
               A Ferrivox Ltd technology project. {siteConfig.supportStatement}
             </p>
-            <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1.5">
-              <span className="status-dot bg-cyanx" />
-              <span className="font-mono text-[11px] tracking-widest text-graphite">
-                CONNEXUS · {siteConfig.status.label}
+            <div className="mt-6 flex flex-wrap items-center gap-4">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1.5">
+                <span className="status-dot bg-cyanx" />
+                <span className="font-mono text-[11px] tracking-widest text-graphite">
+                  CONNEXUS · {siteConfig.status.label}
+                </span>
               </span>
+              <a
+                href={`mailto:${siteConfig.company.email}`}
+                className="text-sm text-signal-300 transition-colors hover:text-signal-200"
+              >
+                {siteConfig.company.email}
+              </a>
+            </div>
+            <div className="mt-5">
+              <Link href="/contact" className="btn-secondary !px-4 !py-2 text-xs">Contact Us</Link>
             </div>
           </div>
 
@@ -71,6 +83,10 @@ export function Footer() {
             <LinkColumn title="Product" links={productLinks} />
             <LinkColumn title="Participate" links={participateLinks} />
             <LinkColumn title="Company" links={[...companyLinks, ...legalLinks]} />
+          </div>
+
+          <div className="lg:col-span-2">
+            <SocialLinks />
           </div>
         </div>
 
