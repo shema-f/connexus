@@ -58,10 +58,10 @@ export const siteConfig = {
    * renders icons only for populated entries. Fill these in as accounts go live.
    */
   socials: [
-    // { label: "GitHub", href: "https://github.com/ferrivox" },
-    // { label: "LinkedIn", href: "https://www.linkedin.com/company/ferrivox" },
-    // { label: "YouTube", href: "https://www.youtube.com/@ferrivox" },
-    // { label: "X", href: "https://x.com/ferrivox" },
+    { label: "GitHub", href: "https://github.com/shema-f/connexus" },
+    // { label: "LinkedIn", href: "" },
+    // { label: "YouTube", href: "" },
+    // { label: "X", href: "" },
   ] as { label: string; href: string }[],
   assistant: {
     name: "Connexus Bot",
