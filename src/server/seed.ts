@@ -85,10 +85,6 @@ export async function ensureSeeded() {
     },
   ];
 
-  for (const [i, r] of roadmap.entries()) {
-    await db.content.insert({ kind: "roadmap", title: r.title, body: r.body, order: r.order, published: true } as never);
-  }
-  for (const f of faqs) {
-    await db.content.insert({ kind: "faq", title: f.title, body: f.body, published: true } as never);
-  }
+  await db.content.insertMany(roadmap.map((r) => ({ kind: "roadmap", title: r.title, body: r.body, order: r.order, published: true })) as never);
+  await db.content.insertMany(faqs.map((f) => ({ kind: "faq", title: f.title, body: f.body, published: true })) as never);
 }

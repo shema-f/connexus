@@ -38,10 +38,13 @@ async function loadAll(): Promise<Store> {
 function persist(store: Store): Promise<void> {
   queue = queue.then(async () => {
     await ensureDir();
-    const tmp = path.join(DATA_DIR, "db.json.tmp");
     const dest = path.join(DATA_DIR, "db.json");
-    await fs.writeFile(tmp, JSON.stringify(store, null, 2), "utf8");
-    // Atomic rename can transiently fail on Windows when concurrent workers
+    const payload = JSON.stringify(store, null, 2);
+    // Unique temp name per write: parallel Next.js build workers each run their
+    // own copy of this module, so a shared tmp path causes rename collisions.
+    const tmp = path.join(DATA_DIR, `db.json.${process.pid}.${Math.random().toString(36).slice(2)}.tmp`);
+    await fs.writeFile(tmp, payload, "utf8");
+    // Atomic rename can transiently fail on Windows when concurrent processes
     // hold the destination open — retry, then fall back to an in-place write.
     for (let attempt = 0; attempt < 5; attempt++) {
       try {
@@ -49,11 +52,19 @@ function persist(store: Store): Promise<void> {
         return;
       } catch (err) {
         const code = (err as NodeJS.ErrnoException).code;
-        if (code !== "EPERM" && code !== "EACCES") throw err;
+        if (code !== "EPERM" && code !== "EACCES" && code !== "ENOENT") throw err;
         await new Promise((r) => setTimeout(r, 40 * (attempt + 1)));
+        // ENOENT means our tmp file vanished (or was consumed); recreate it.
+        if (code === "ENOENT") {
+          try {
+            await fs.writeFile(tmp, payload, "utf8");
+          } catch {
+            /* directory-level issue; final fallback below handles it */
+          }
+        }
       }
     }
-    await fs.writeFile(dest, JSON.stringify(store, null, 2), "utf8");
+    await fs.writeFile(dest, payload, "utf8");
     await fs.rm(tmp, { force: true });
   });
   return queue;
@@ -85,6 +96,25 @@ export function collection<T extends WithMeta>(name: string) {
     return item;
   }
 
+  /** Append many items with a single read-modify-write cycle. */
+  async function insertMany(items: Omit<T, keyof WithMeta>[]): Promise<T[]> {
+    if (items.length === 0) return [];
+    const store = await loadAll();
+    const now = new Date().toISOString();
+    const created = items.map(
+      (data) =>
+        ({
+          ...data,
+          id: crypto.randomUUID(),
+          createdAt: now,
+          updatedAt: now,
+        }) as unknown as T
+    );
+    store[name] = [...((store[name] as T[]) ?? []), ...created];
+    await persist(store);
+    return created;
+  }
+
   async function update(id: string, patch: Partial<T>): Promise<T | undefined> {
     const store = await loadAll();
     const items = ((store[name] as T[]) ?? []).map((item) =>
@@ -103,5 +133,5 @@ export function collection<T extends WithMeta>(name: string) {
     return ((store[name] as T[]) ?? []).length < before;
   }
 
-  return { list, find, insert, update, remove };
+  return { list, find, insert, insertMany, update, remove };
 }
