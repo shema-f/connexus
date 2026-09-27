@@ -29,7 +29,7 @@ export default function DeveloperProjectsPage() {
           <div className="container-page grid gap-12 lg:grid-cols-[1fr_1.1fr]">
             <div>
               <span className="tech-label-cyan">SUBMIT A PROJECT</span>
-              <h2 className="mt-4 text-2xl font-bold text-white sm:text-3xl">Built something with Connexus?</h2>
+              <h2 className="mt-4 font-display text-2xl font-bold text-white sm:text-3xl">Built something with Connexus?</h2>
               <p className="mt-4 text-sm leading-relaxed text-graphite">
                 Share prototypes, experiments and integrations. Every submission is reviewed before
                 it appears publicly.
@@ -40,7 +40,7 @@ export default function DeveloperProjectsPage() {
             </div>
             <div>
               <span className="tech-label-cyan">PROJECT DIRECTORY</span>
-              <h2 className="mt-4 text-2xl font-bold text-white sm:text-3xl">Approved projects</h2>
+              <h2 className="mt-4 font-display text-2xl font-bold text-white sm:text-3xl">Approved projects</h2>
               <div className="mt-8">
                 <ProjectDirectory />
               </div>

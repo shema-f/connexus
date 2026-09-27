@@ -38,7 +38,10 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        body: ["var(--font-sans)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "var(--font-sans)", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
+        castle: ["var(--font-castle)", "Georgia", "serif"],
       },
       fontSize: {
         "hero-lg": ["clamp(2.6rem, 6.5vw, 5.25rem)", { lineHeight: "1.04", letterSpacing: "-0.03em" }],

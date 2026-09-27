@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---- Typography tokens ----
+ * Inter (body/UI) · JetBrains Mono (technical) · Sora (display, standing in for
+ * HYWenHei) · Playfair Display (accent serif, standing in for Castle).
+ * next/font loads these and exposes the CSS variables on <body>.
+ */
+:root {
+  --font-body: var(--font-sans);
+  --font-hywenhei: var(--font-display);
+  --font-castle-serif: var(--font-castle);
+}
+
 @layer base {
   :root {
     color-scheme: dark;
@@ -68,6 +79,11 @@
     @apply font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-cyanx;
   }
 
+  /* ---- Accent serif (Castle stand-in) for decorative brand moments ---- */
+  .brand-accent {
+    @apply font-castle italic;
+  }
+
   /* ---- Status dot ---- */
   .status-dot {
     @apply relative inline-flex h-2 w-2 rounded-full;
@@ -132,6 +148,15 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  .font-display {
+    font-family: var(--font-display), var(--font-sans), sans-serif;
+  }
+  .font-castle {
+    font-family: var(--font-castle), Georgia, serif;
+  }
+  .font-body {
+    font-family: var(--font-sans), system-ui, sans-serif;
   }
   .mask-fade-b {
     -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);

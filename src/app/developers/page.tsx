@@ -31,7 +31,7 @@ export default function DevelopersPage() {
           <div className="container-page grid gap-12 lg:grid-cols-2">
             <div>
               <span className="tech-label-cyan">DEVELOPER PREVIEW</span>
-              <h2 className="mt-4 text-2xl font-bold text-white sm:text-3xl">Create your developer profile</h2>
+              <h2 className="mt-4 font-display text-2xl font-bold text-white sm:text-3xl">Create your developer profile</h2>
               <p className="mt-4 text-sm leading-relaxed text-graphite">
                 Profiles are reviewed before becoming publicly listed. Your email is private by
                 default — you control whether it appears on your public profile.
@@ -42,7 +42,7 @@ export default function DevelopersPage() {
             </div>
             <div>
               <span className="tech-label-cyan">COMMUNITY DIRECTORY</span>
-              <h2 className="mt-4 text-2xl font-bold text-white sm:text-3xl">Connexus developers</h2>
+              <h2 className="mt-4 font-display text-2xl font-bold text-white sm:text-3xl">Connexus developers</h2>
               <p className="mt-4 text-sm leading-relaxed text-graphite">
                 Approved public profiles of developers building with (or alongside) Connexus.
               </p>

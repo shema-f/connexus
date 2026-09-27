@@ -45,7 +45,7 @@ export function SectionHeader({
   return (
     <Reveal className={`flex flex-col gap-4 ${alignCls}`}>
       <span className="tech-label-cyan">{eyebrow}</span>
-      <h2 className="max-w-3xl text-balance text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
+      <h2 className="max-w-3xl text-balance font-display text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
         {title}
       </h2>
       {description ? <p className="max-w-2xl text-base leading-relaxed text-graphite sm:text-lg">{description}</p> : null}

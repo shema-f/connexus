@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Sora, Playfair_Display } from "next/font/google";
 import { ConnexusBot } from "@/components/ConnexusBot";
+import { getSiteUrl } from "@/lib/site-config";
 import "./globals.css";
 
+/* ---- Typography system ----
+ * Inter          — primary UI & body font (--font-sans / --font-body)
+ * JetBrains Mono — technical & data monospace (--font-mono)
+ * Sora           — display/title face standing in for HYWenHei (--font-display)
+ * Playfair Display — accent serif standing in for Castle (--font-castle)
+ */
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -15,7 +22,20 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const display = Sora({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+const castle = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-castle",
+  display: "swap",
+});
+
+const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -66,7 +86,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${mono.variable} bg-ink font-sans text-white antialiased`}>
+      <body
+        className={`${inter.variable} ${mono.variable} ${display.variable} ${castle.variable} bg-ink font-sans text-white antialiased`}
+      >
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[100] focus:rounded-md focus:bg-signal-600 focus:px-4 focus:py-2 focus:text-white"

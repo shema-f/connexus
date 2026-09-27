@@ -26,9 +26,12 @@ export default function DeveloperTermsPage() {
         <PageHero eyebrow="LEGAL" title="Developer Terms" description="Last updated: September 2026" />
         <section className="section-pad">
           <div className="container-page max-w-3xl space-y-8">
-            {sections.map((s) => (
+            {sections.map((s, i) => (
               <div key={s.title}>
-                <h2 className="text-lg font-semibold text-white">{s.title}</h2>
+                <h2 className="flex items-baseline gap-3 text-lg font-semibold text-white">
+                  <span className="font-mono text-sm text-signal-300">{String(i + 1).padStart(2, "0")}.</span>
+                  {s.title}
+                </h2>
                 <p className="mt-2 text-sm leading-relaxed text-graphite">{s.body}</p>
               </div>
             ))}

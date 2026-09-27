@@ -27,9 +27,9 @@ export function Hero() {
             </p>
           </Reveal>
           <Reveal delay={0.08}>
-            <h1 className="text-hero-lg text-balance font-bold text-white">
+            <h1 className="text-hero-lg text-balance font-display font-bold tracking-tight text-white">
               Your digital world shouldn&apos;t stop when the{" "}
-              <span className="text-gradient">Internet does.</span>
+              <span className="brand-accent text-gradient">Internet does.</span>
             </h1>
           </Reveal>
           <Reveal delay={0.16}>

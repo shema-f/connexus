@@ -19,7 +19,7 @@ export function PageHero({
       <div className="container-page relative py-16 sm:py-20">
         <Reveal>
           <span className="tech-label-cyan">{eyebrow}</span>
-          <h1 className="mt-4 max-w-3xl text-balance text-hero-md font-bold text-white">{title}</h1>
+          <h1 className="mt-4 max-w-3xl text-balance text-hero-md font-display font-bold tracking-tight text-white">{title}</h1>
           {description ? (
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-graphite sm:text-lg">{description}</p>
           ) : null}

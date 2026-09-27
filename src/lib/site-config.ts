@@ -3,8 +3,20 @@
  * Single source of truth for brand strings, navigation and product status.
  */
 
+const FALLBACK_SITE_URL = "http://localhost:3000";
+
+/**
+ * Resolve the canonical site URL safely.
+ * An unset OR EMPTY NEXT_PUBLIC_SITE_URL (common on hosting platforms) must
+ * never produce `new URL("")` — that throws ERR_INVALID_URL during build.
+ */
+export function getSiteUrl(): string {
+  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  return raw && raw.length > 0 ? raw : FALLBACK_SITE_URL;
+}
+
 export const siteConfig = {
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  url: getSiteUrl(),
   productName: "Connexus",
   company: {
     name: "Ferrivox Ltd",

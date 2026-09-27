@@ -35,8 +35,9 @@ export default function ContactPage() {
                 <a href={`mailto:${siteConfig.company.email}`} className="mt-3 inline-block text-sm text-signal-300 hover:text-signal-200">
                   {siteConfig.company.email}
                 </a>
-                <p className="mt-4 font-mono text-[10px] tracking-[0.14em] text-graphite">
+                <p className="brand-accent mt-4 text-lg text-graphite">
                   &ldquo;{siteConfig.company.slogan}&rdquo;
+                  <span className="sr-only"> — Ferrivox Ltd</span>
                 </p>
               </div>
               <div className="glass rounded-2xl p-6">

@@ -13,7 +13,7 @@ export function FinalCta() {
       <div className="container-page relative section-pad text-center">
         <Reveal>
           <span className="tech-label-cyan">CONNEXUS · COMING SOON</span>
-          <h2 className="mx-auto mt-5 max-w-3xl text-balance text-3xl font-bold tracking-tight text-white sm:text-5xl">
+          <h2 className="mx-auto mt-5 max-w-3xl text-balance font-display text-3xl font-bold tracking-tight text-white sm:text-5xl">
             Help us build what comes next.
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-graphite sm:text-lg">

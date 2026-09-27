@@ -57,8 +57,7 @@ export function LogoLockup({
       <LogoMark className="h-9 w-9" mono={mono} />
       <span className="flex flex-col leading-none">
         <span
-          className={`text-lg font-bold tracking-[0.18em] ${mono ? "text-ink" : "text-white"}`}
-          style={{ fontFamily: "var(--font-sans)" }}
+          className={`font-display text-lg font-bold tracking-[0.18em] ${mono ? "text-ink" : "text-white"}`}
         >
           CONNE<span className={mono ? "" : "text-signal-400"}>X</span>US
         </span>

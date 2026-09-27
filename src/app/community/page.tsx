@@ -51,7 +51,7 @@ export default function CommunityPage() {
         <section id="discussions" className="section-pad hairline">
           <div className="container-page">
             <span className="tech-label-cyan">DISCUSSIONS · MODERATED</span>
-            <h2 className="mt-4 max-w-2xl text-2xl font-bold text-white sm:text-3xl">
+            <h2 className="mt-4 max-w-2xl font-display text-2xl font-bold text-white sm:text-3xl">
               Commenting and feature requests open with the developer preview.
             </h2>
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-graphite">
@@ -65,7 +65,7 @@ export default function CommunityPage() {
           <div className="container-page grid gap-12 lg:grid-cols-2">
             <div>
               <span className="tech-label-cyan">FEEDBACK</span>
-              <h2 className="mt-4 text-2xl font-bold text-white sm:text-3xl">Tell us what you think.</h2>
+              <h2 className="mt-4 font-display text-2xl font-bold text-white sm:text-3xl">Tell us what you think.</h2>
               <p className="mt-4 text-sm leading-relaxed text-graphite">
                 Reviews are moderated before publication and appear as &ldquo;early feedback from
                 the community&rdquo; — never as customer reviews.
@@ -75,7 +75,7 @@ export default function CommunityPage() {
               </div>
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-white sm:text-3xl">Early feedback from the community</h2>
+              <h2 className="font-display text-2xl font-bold text-white sm:text-3xl">Early feedback from the community</h2>
               <div className="mt-8">
                 <ApprovedReviews />
               </div>
