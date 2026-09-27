@@ -43,9 +43,12 @@ const config: Config = {
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
         castle: ["var(--font-castle)", "Georgia", "serif"],
       },
+      // Display scale tuned for Sora: slightly looser tracking than Inter
+      // (Sora reads denser at size) and a touch more line height for its
+      // taller ascenders so hero lines don't feel cramped.
       fontSize: {
-        "hero-lg": ["clamp(2.6rem, 6.5vw, 5.25rem)", { lineHeight: "1.04", letterSpacing: "-0.03em" }],
-        "hero-md": ["clamp(2rem, 4.5vw, 3.4rem)", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
+        "hero-lg": ["clamp(2.6rem, 6.75vw, 5.5rem)", { lineHeight: "1.05", letterSpacing: "-0.025em" }],
+        "hero-md": ["clamp(2rem, 4.6vw, 3.5rem)", { lineHeight: "1.12", letterSpacing: "-0.015em" }],
       },
       boxShadow: {
         glow: "0 0 40px -12px rgba(28,127,242,0.45)",

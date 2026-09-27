@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Sora, Playfair_Display } from "next/font/google";
+import { Inter, JetBrains_Mono, Sora, Cormorant_Garamond } from "next/font/google";
 import { ConnexusBot } from "@/components/ConnexusBot";
 import { getSiteUrl } from "@/lib/site-config";
 import "./globals.css";
 
 /* ---- Typography system ----
- * Inter          — primary UI & body font (--font-sans / --font-body)
- * JetBrains Mono — technical & data monospace (--font-mono)
- * Sora           — display/title face standing in for HYWenHei (--font-display)
- * Playfair Display — accent serif standing in for Castle (--font-castle)
+ * Inter              — primary UI & body font (--font-sans / --font-body)
+ * JetBrains Mono     — technical & data monospace (--font-mono)
+ * Sora               — display/title face standing in for HYWenHei (--font-display)
+ * Cormorant Garamond — accent serif standing in for Castle (--font-castle)
+ * Candidates are compared at /typography (unindexed).
  */
 const inter = Inter({
   subsets: ["latin"],
@@ -29,9 +30,11 @@ const display = Sora({
   display: "swap",
 });
 
-const castle = Playfair_Display({
+const castle = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-castle",
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
