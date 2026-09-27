@@ -19,7 +19,7 @@ digital infrastructure platform being developed by **Ferrivox Ltd** (Rwanda).
 
 ```bash
 npm install
-cp .env.example .env.local   # set AUTH_SECRET, ADMIN_EMAIL, ADMIN_PASSWORD, NEXT_PUBLIC_SITE_URL
+cp .env.example .env.local   # set AUTH_SECRET, ADMIN_EMAIL, ADMIN_PASSWORD (site URL optional)
 npm run dev
 ```
 
@@ -28,6 +28,52 @@ Production:
 ```bash
 npm run build && npm start
 ```
+
+## Configuration
+
+All configuration lives in environment variables (see `.env.example`). Only `AUTH_SECRET`
+and the admin credentials are required; everything else has a working default.
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `AUTH_SECRET` | ✅ | HMAC key for signed admin session cookies — generate with `openssl rand -base64 32` |
+| `ADMIN_EMAIL` / `ADMIN_PASSWORD` | ✅ | Seeded admin login for `/admin` |
+| `NEXT_PUBLIC_SITE_URL` | — | Canonical origin for SEO (see below). Leave empty on Vercel |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | — | Public contact email (default `hello@ferrivox.com`) |
+| `DATA_DIR` | — | Location of the JSON store (default `.data/`) |
+| `CONNEXUS_AI_API_URL` / `CONNEXUS_AI_API_KEY` / `CONNEXUS_AI_MODEL` | — | Optional grounded LLM for the Connexus Bot |
+| `EMAIL_API_KEY` / `EMAIL_FROM` | — | Optional transactional email provider |
+| `STORAGE_ACCESS_KEY` / `STORAGE_SECRET_KEY` / `STORAGE_BUCKET` | — | Optional S3-compatible storage |
+| `NEXT_PUBLIC_ANALYTICS_ID` | — | Optional privacy-respecting analytics |
+
+### Site URL resolution
+
+`getSiteUrl()` in `src/lib/site-config.ts` resolves the canonical origin in this order:
+
+1. `NEXT_PUBLIC_SITE_URL` — if set; trailing slashes are stripped, empty never crashes the build
+2. `VERCEL_PROJECT_PRODUCTION_URL` — injected automatically by Vercel
+3. `VERCEL_URL` — per-deployment fallback, also injected by Vercel
+4. `http://localhost:3000`
+
+Canonical URLs, `og:url`, `sitemap.xml`, `robots.txt` and every JSON-LD `url` derive from
+that single value — set one variable and the whole site follows. On Vercel you can leave
+`NEXT_PUBLIC_SITE_URL` unset and the production domain is detected for you.
+
+### Custom domain (when you outgrow `*.vercel.app`)
+
+1. **Add the domain in Vercel** — Project → Settings → Domains — and follow the DNS
+   prompts it shows (an apex `A` record or a `CNAME` for subdomains). Wait for the
+   certificate to be issued.
+2. **Point SEO at it** — set `NEXT_PUBLIC_SITE_URL=https://your-domain.com` in Vercel →
+   Settings → Environment Variables (Production) and redeploy. Canonicals, sitemap,
+   OG URLs and structured data all switch over automatically; no code changes needed.
+3. **Update Google Search Console** — a `vercel.app` URL-prefix property can't be
+   upgraded to a Domain property. Add a property for the new origin, verify (the HTML
+   file and meta tag work as-is), and submit `https://your-domain.com/sitemap.xml`.
+4. **Redirect the old origin** — configure Vercel to 301 `*.vercel.app` traffic to the
+   custom domain so accumulated signals and old links transfer.
+5. **Re-run the checks** — `npm run seo:check` after deploy: JSON-LD URLs and the
+   sitemap should all reference the new origin, with 0 errors.
 
 ## Routes
 
@@ -104,14 +150,24 @@ and require admin approval. Developer emails are private unless the developer op
 ## SEO
 
 Metadata templates, canonical URLs, Open Graph + dynamic OG image, Twitter cards,
-`sitemap.xml`, `robots.txt`, and structured data (Organization, SoftwareApplication,
-FAQPage, BreadcrumbList). No fake ratings or reviews in structured data.
+`sitemap.xml`, `robots.txt`, Google Search Console verification (HTML file at the site
+root **and** a `google-site-verification` meta tag), and structured data: Organization +
+WebSite (global), WebApplication (technology), FAQPage (FAQ), BreadcrumbList. No fake
+ratings or reviews in structured data.
+
+- Launch content ships as an in-code fallback (`listContent()` in `src/server/seed.ts`),
+  so SEO-critical pages never render empty on serverless builds where the `.data` store
+  is absent.
+- `npm run seo:check` validates every JSON-LD block against Google's rich-results
+  requirements (required fields per type, duplicate entities, canonicals) — once against
+  the local build, once against the live site.
 
 ## Performance
 
 - 3D canvas loads **after first paint** via dynamic import (no WebGL before LCP)
 - Procedural geometry — zero 3D asset downloads
-- System font fallbacks; `next/font` self-hosted Inter + JetBrains Mono
+- System font fallbacks; `next/font` self-hosted Inter (body), JetBrains Mono (technical),
+  Sora (display) and Cormorant Garamond (accent serif)
 - Reduced-motion support throughout
 
 ## Internationalization
