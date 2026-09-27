@@ -19,7 +19,6 @@ import { FaqSection } from "@/components/home/FaqSection";
 import { FinalCta } from "@/components/home/FinalCta";
 import { db } from "@/server/collections";
 import { ensureSeeded } from "@/server/seed";
-import { orgJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Connexus — Offline-First Digital Infrastructure | Ferrivox",
@@ -34,10 +33,6 @@ export default async function HomePage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd()) }}
-      />
       <AnnouncementBar />
       <Navbar />
       <main id="main">
