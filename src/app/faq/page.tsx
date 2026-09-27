@@ -3,8 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { PageHero } from "@/components/PageHero";
 import { FinalCta } from "@/components/home/FinalCta";
-import { db } from "@/server/collections";
-import { ensureSeeded } from "@/server/seed";
+import { listContent } from "@/server/seed";
 import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { Reveal } from "@/components/motion/Reveal";
 
@@ -16,8 +15,7 @@ export const metadata: Metadata = {
 };
 
 export default async function FaqPage() {
-  await ensureSeeded();
-  const items = (await db.content.list((c) => c.kind === "faq" && c.published))
+  const items = (await listContent("faq"))
     .sort((a, b) => a.createdAt.localeCompare(b.createdAt));
 
   return (

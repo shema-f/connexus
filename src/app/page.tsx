@@ -17,8 +17,7 @@ import { RoadmapTeaser } from "@/components/home/RoadmapTeaser";
 import { FeedbackTeaser } from "@/components/home/FeedbackTeaser";
 import { FaqSection } from "@/components/home/FaqSection";
 import { FinalCta } from "@/components/home/FinalCta";
-import { db } from "@/server/collections";
-import { ensureSeeded } from "@/server/seed";
+import { listContent } from "@/server/seed";
 
 export const metadata: Metadata = {
   title: "Connexus — Offline-First Digital Infrastructure | Ferrivox",
@@ -28,8 +27,7 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  await ensureSeeded();
-  const faqs = (await db.content.list((c) => c.kind === "faq" && c.published)).slice(0, 8);
+  const faqs = (await listContent("faq")).slice(0, 8);
 
   return (
     <>

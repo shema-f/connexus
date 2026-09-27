@@ -51,8 +51,8 @@ export function webAppJsonLd() {
     description:
       "Offline-first local digital infrastructure platform for communication, content, applications and edge services, being developed by Ferrivox Ltd.",
     url: BASE,
-    author: { "@type": "Organization", name: "Ferrivox Ltd", url: BASE },
-    publisher: { "@type": "Organization", name: "Ferrivox Ltd", url: BASE },
+    author: { "@type": "Organization", name: "Ferrivox Ltd", url: BASE, logo: LOGO_URL },
+    publisher: { "@type": "Organization", name: "Ferrivox Ltd", url: BASE, logo: LOGO_URL },
     featureList: [
       "Offline-first local networking",
       "Local content and application delivery",

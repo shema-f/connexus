@@ -1,12 +1,10 @@
-import { db } from "@/server/collections";
-import { ensureSeeded } from "@/server/seed";
+import { listContent } from "@/server/seed";
 import { Reveal } from "@/components/motion/Reveal";
 
 const STAGE_LABELS = ["RESEARCH", "PROTOTYPE", "PILOT", "PLATFORM", "HARDWARE"];
 
 export async function RoadmapTimeline() {
-  await ensureSeeded();
-  const items = (await db.content.list((c) => c.kind === "roadmap" && c.published))
+  const items = (await listContent("roadmap"))
     .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 
   return (

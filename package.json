@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "seo:check": "node scripts/validate-schema.mjs --local && node scripts/validate-schema.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^9.114.3",

@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { PageHero } from "@/components/PageHero";
-import { db } from "@/server/collections";
-import { ensureSeeded } from "@/server/seed";
+import { listContent } from "@/server/seed";
 import { Reveal } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
@@ -16,8 +15,7 @@ export const metadata: Metadata = {
 const CATEGORIES = ["Product", "Engineering", "Hardware", "Community", "Developer", "Company"];
 
 export default async function UpdatesPage() {
-  await ensureSeeded();
-  const updates = (await db.content.list((c) => c.kind === "update" && c.published))
+  const updates = (await listContent("update"))
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 
   return (
