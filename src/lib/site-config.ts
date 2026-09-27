@@ -5,14 +5,30 @@
 
 const FALLBACK_SITE_URL = "http://localhost:3000";
 
+function stripTrailingSlash(url: string): string {
+  return url.replace(/\/+$/, "");
+}
+
 /**
- * Resolve the canonical site URL safely.
- * An unset OR EMPTY NEXT_PUBLIC_SITE_URL (common on hosting platforms) must
- * never produce `new URL("")` — that throws ERR_INVALID_URL during build.
+ * Resolve the canonical production site URL safely.
+ * Order: explicit NEXT_PUBLIC_SITE_URL → Vercel production domain → Vercel
+ * deployment URL → localhost. An unset OR EMPTY variable must never produce
+ * `new URL("")` — that throws ERR_INVALID_URL during build.
  */
 export function getSiteUrl(): string {
-  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  return raw && raw.length > 0 ? raw : FALLBACK_SITE_URL;
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (explicit) return stripTrailingSlash(explicit);
+
+  // Vercel injects these automatically (production domain, then deployment URL).
+  const production =
+    process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim() ||
+    process.env.NEXT_PUBLIC_VERCEL_URL?.trim();
+  if (production) return `https://${stripTrailingSlash(production)}`;
+
+  const deployment = process.env.VERCEL_URL?.trim();
+  if (deployment) return `https://${stripTrailingSlash(deployment)}`;
+
+  return FALLBACK_SITE_URL;
 }
 
 export const siteConfig = {

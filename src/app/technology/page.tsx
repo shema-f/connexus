@@ -7,7 +7,7 @@ import { HowItWorks } from "@/components/home/HowItWorks";
 import { OfflineFirst } from "@/components/home/OfflineFirst";
 import { InteractiveNetwork } from "@/components/home/InteractiveNetwork";
 import { FinalCta } from "@/components/home/FinalCta";
-import { softwareAppJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { webAppJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Technology",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export default function TechnologyPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppJsonLd()) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd()) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Technology", path: "/technology" }])) }} />
       <Navbar />
       <main id="main">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Sora, Cormorant_Garamond } from "next/font/google";
 import { ConnexusBot } from "@/components/ConnexusBot";
 import { getSiteUrl } from "@/lib/site-config";
+import { orgJsonLd, websiteJsonLd } from "@/lib/seo";
 import "./globals.css";
 
 /* ---- Typography system ----
@@ -80,9 +81,16 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
+  verification: {
+    google: "googleffbff90983cd3bd9",
+  },
   icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }, { url: "/favicon-light.svg", type: "image/svg+xml", media: "(prefers-color-scheme: light)" }],
-    apple: "/apple-touch-icon.svg",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-light.svg", type: "image/svg+xml", media: "(prefers-color-scheme: light)" },
+      { url: "/brand/logo-512.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: "/brand/apple-touch-icon.png",
   },
 };
 
@@ -98,6 +106,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd()) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd()) }}
+        />
         {children}
         <ConnexusBot />
       </body>
